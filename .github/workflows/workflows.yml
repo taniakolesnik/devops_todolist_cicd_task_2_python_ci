@@ -1,5 +1,5 @@
 name: ccid_task_2
-run-name: ${{ github.actor }} triggered with ${{ github.ref_name }}
+run-name: ${{ github.actor }} triggered with ${{ github.sha }}
 
 on:
   push:
