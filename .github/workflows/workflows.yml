@@ -13,11 +13,40 @@ on:
 
   workflow_dispatch:
 
+env:
+  PYTHON_VERSION : 3.8
+
 jobs:
   python-ci:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./src/
     steps:
       - uses: actions/checkout@v4
+      # runs the tests
+
+      # generates a coverage
+
+      # displays the coverage report
+
+      # checks the code style
+
+      # checks the complexity of the code
+
+      # Python code as an artifact
+      - name: Setup Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v6.2.0
+        with:
+          python-version: '${{ env.PYTHON_VERSION }}'
+
+      - name: Run app
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python manage.py migrate
+          python manage.py runserver
+
 
       # - name: Show GITHUB_ACTIONS enviroment variables
       #   run: |
