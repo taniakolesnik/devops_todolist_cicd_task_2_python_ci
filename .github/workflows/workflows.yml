@@ -1,2 +1,32 @@
 name: ccid_task_2
 run-name: ${{ github.actor }} triggered with ${{ github.ref_name }}
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  python-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # - name: Show GITHUB_ACTIONS enviroment variables
+      #   run: |
+      #     echo "GITHUB_ACTIONS=$GITHUB_ACTIONS"
+
+      # - name: Show branch and repository name
+      #   run: |
+      #     echo "Repository: ${{ github.repository }}. Branch: ${{ github.ref }}"
+
+      # - name: Show action that triggered workflow
+      #   run: |
+      #     echo "Job was triggered by ${{ github.event_name }}"
