@@ -24,38 +24,28 @@ jobs:
         working-directory: ./src/
     steps:
       - uses: actions/checkout@v4
-      # runs the tests
 
-      # generates a coverage
-
-      # displays the coverage report
-
-      # checks the code style
-
-      # checks the complexity of the code
-
-      # Python code as an artifact
       - name: Setup Python ${{ env.PYTHON_VERSION }}
         uses: actions/setup-python@v6.2.0
         with:
           python-version: '${{ env.PYTHON_VERSION }}'
 
-      - name: Run app
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install flake8
           pip install -r requirements.txt
-          python manage.py migrate
-          python manage.py runserver
+
+      - name: Lint. Flake code style check
+        run: |
+          flake8 . --show-source --statistics
 
 
-      # - name: Show GITHUB_ACTIONS enviroment variables
+      # - name: Flake code complexity check
       #   run: |
-      #     echo "GITHUB_ACTIONS=$GITHUB_ACTIONS"
 
-      # - name: Show branch and repository name
-      #   run: |
-      #     echo "Repository: ${{ github.repository }}. Branch: ${{ github.ref }}"
 
-      # - name: Show action that triggered workflow
+      # - name: Run app
       #   run: |
-      #     echo "Job was triggered by ${{ github.event_name }}"
+      #     python manage.py migrate
+
