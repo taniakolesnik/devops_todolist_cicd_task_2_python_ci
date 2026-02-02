@@ -38,6 +38,7 @@ jobs:
 
       - name: Lint. Flake code style check
         run: |
+          cd ../
           flake8 . --show-source --statistics
 
 
