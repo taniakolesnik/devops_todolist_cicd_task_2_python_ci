@@ -19,9 +19,6 @@ env:
 jobs:
   python-ci:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src/
     steps:
       - uses: actions/checkout@v4
 
@@ -37,18 +34,22 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run tests
+        working-directory: ./src/
         run: pytest -v
 
       - name: Coverage report
+        working-directory: ./src/
         run: |
           pytest -v --cov=. --cov-report=term-missing
 
       - name: Lint
+        working-directory: ./src/
         run: |
           flake8 . --show-source --statistics --exit-zero
 
 
       - name: Code complexity check
+        working-directory: ./src/
         run: |
           flake8 . --statistics --max-complexity=10 --exit-zero
 
